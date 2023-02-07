@@ -1,0 +1,9 @@
+--	Testbench do projeto do banco de registradores do RISC-V
+-- Marcus Jesse A de Oliveira
+
+library IEEE;
+use	IEEE.std_logic_1164.all;
+use	IEEE.numeric_std.all;
+
+entity XREGS_tb is
+end XREGS_tb;

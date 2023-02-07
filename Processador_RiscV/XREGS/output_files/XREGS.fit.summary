@@ -1,0 +1,16 @@
+Fitter Status : Successful - Tue Jan 31 19:37:08 2023
+Quartus Prime Version : 22.1std.0 Build 915 10/25/2022 SC Lite Edition
+Revision Name : XREGS
+Top-level Entity Name : XREGS
+Family : Cyclone 10 LP
+Device : 10CL006YU256C6G
+Timing Models : Final
+Total logic elements : 1,585 / 6,272 ( 25 % )
+    Total combinational functions : 1,382 / 6,272 ( 22 % )
+    Dedicated logic registers : 1,056 / 6,272 ( 17 % )
+Total registers : 1056
+Total pins : 114 / 177 ( 64 % )
+Total virtual pins : 0
+Total memory bits : 0 / 276,480 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 30 ( 0 % )
+Total PLLs : 0 / 2 ( 0 % )
