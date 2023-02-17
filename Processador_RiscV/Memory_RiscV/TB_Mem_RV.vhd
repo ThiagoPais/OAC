@@ -16,7 +16,7 @@ component mem_rv is
 	port (
 		clk		: in	std_logic;
 		we 		: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
+		addr		: in	std_logic_vector(7 downto 0);
 		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);
@@ -36,7 +36,7 @@ process
 			we			<=	'0';
 			addr		<= std_logic_vector(to_unsigned(i,8));
 			data_in	<= std_logic_vector(to_unsigned(i,30)) & "00";
-			report to_string(data_out);
+			--report to_string(data_out);
 			wait for 1 ns;
 			
 			clk		<=	'1';

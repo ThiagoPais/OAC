@@ -20,8 +20,6 @@ end entity;
 
 architecture RTL of Mem_RV is
 
-Type ram_type is array (0 to ram_depth - 1) of std_logic_vector(ram_width - 1 downto 0);
-
 Type mem_type is array (0 to (2**addr'length)-1) of std_logic_vector(data_in'range);
 
 signal read_addr: std_logic_vector(addr'range);
@@ -45,7 +43,7 @@ begin
 	end loop;
 	
 	n	:=	128;
-	while	n<4096	loop
+	while	n<256	loop
 		readline(data_file, text_line);
 		hread(text_line, text_word);
 		memoria(n)	:=	text_word;
@@ -59,13 +57,12 @@ signal mem: mem_type := init_mem;
 begin
 	process(clk) begin
 		if rising_edge(clk)then
-			if we = '1' and n > 127 then
+			if we = '1' and to_integer(unsigned(addr)) > 127 then
 				mem(to_integer(unsigned(addr))) <= data_in;
 			end if;
 		end if;
 		read_addr <= addr;
 	end process;
-	
-	dataout <= mem(to_integer(unsigned(read_addr)));
-
+		
+	data_out <= mem(to_integer(unsigned(read_addr)));
 end architecture;

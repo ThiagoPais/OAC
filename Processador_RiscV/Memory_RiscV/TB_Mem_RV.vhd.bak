@@ -5,17 +5,18 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use std.textio.all;
 
-entity mem_rv_tb is
-end mem_rv_tb;
+entity TB_Mem_RV is
+end TB_Mem_RV;
 
-architecture test of mem_rv_tb is
+architecture test of TB_Mem_RV is
 
 component mem_rv is 
 	port (
 		clk		: in	std_logic;
 		we 		: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
+		addr		: in	std_logic_vector(7 downto 0);
 		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);
