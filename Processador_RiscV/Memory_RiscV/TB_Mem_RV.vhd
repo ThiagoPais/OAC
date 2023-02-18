@@ -12,7 +12,7 @@ end TB_Mem_RV;
 
 architecture test of TB_Mem_RV is
 
-component mem_rv is 
+component data_mem_rv is 
 	port (
 		clk		: in	std_logic;
 		we 		: in	std_logic;
@@ -27,7 +27,7 @@ signal addr					:	std_logic_vector(7 downto 0);
 signal data_in, data_out	:	std_logic_vector(31 downto 0);
 
 begin
-	DUT: mem_rv port map(clk => clk, we => we, addr => addr, data_in => data_in, data_out => data_out);
+	DUT: data_mem_rv port map(clk => clk, we => we, addr => addr, data_in => data_in, data_out => data_out);
 
 process
 	begin

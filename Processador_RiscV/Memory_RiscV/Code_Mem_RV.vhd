@@ -8,7 +8,7 @@ use IEEE.numeric_std.all;
 use IEEE.std_logic_textio.all;
 use std.textio.all;
 
-entity Mem_RV is
+entity Code_Mem_RV is
 	port (
 		clk 	: in	std_logic;
 		we 		: in	std_logic;
@@ -18,37 +18,37 @@ entity Mem_RV is
 	);
 end entity;
 
-architecture RTL of Mem_RV is
+architecture RTL of Code_Mem_RV is
 
 Type mem_type is array (0 to (2**addr'length)-1) of std_logic_vector(data_in'range);
 
 signal read_addr: std_logic_vector(addr'range);
 
 impure function init_mem return mem_type is
-	file text_file	:	text open read_mode is "code.txt";
-	file data_file	:	text open read_mode is "data.txt";
+	file text_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/code.txt"; -- Mudar diret�rio
+	--file data_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/data.txt"; -- Mudar diret�rio
 	
 	variable text_line	:	line;
 	variable text_word	:	std_logic_vector(data_in'range);
-	variable memoria		:	mem_type;
-	variable n				:	integer;
+	variable memoria	:	mem_type;
+	variable n		:	integer;
 
 begin
 	n	:=	0;
-	while not endfile(text_file) loop
+	while not endfile(text_file) and n < 256 loop
 		readline(text_file, text_line);
 		hread(text_line, text_word);
 		memoria(n)	:=	text_word;
-		n	:=	n+4;
+		n	:=	n+1;
 	end loop;
 	
-	n	:=	128;
-	while	n<256	loop
-		readline(data_file, text_line);
-		hread(text_line, text_word);
-		memoria(n)	:=	text_word;
-		n	:=	n+4;
-	end loop;
+	--n	:=	128;
+	--while	n<256	loop
+	--	readline(data_file, text_line);
+	--	hread(text_line, text_word);
+	--	memoria(n)	:=	text_word;
+	--	n	:=	n+4;
+	--end loop;
 return memoria;
 end;
 
