@@ -71,6 +71,14 @@ component Mem_RV is
 	);
 end component;
 
+component Control is
+	port (
+		instr  : in std_logic_vector(31 downto 0);
+		ALUOp  : out std_logic_vector(1 downto 0);
+		ALUSrc, Branch, MemRead, MemWrite, RegWrite, Mem2Reg: out std_logic
+	);
+end component;
+
 begin
 
 signal clk, x_we, x_rst, zero, m_we : std_logic;
@@ -117,6 +125,17 @@ mem: Data_Mem_RV port map(
 	addr =>	mem_addr,
 	data_in  => mem_in,
 	data_out => mem_out
+);
+
+control: Control port map(
+	instr  => id_instr,
+	ALUOp  => id_AluOp,
+	ALUSrc => id_ALUSrc,
+	Branch => id_Branch,
+	MemRead => id_MemRead,
+	MemWrite => id_MemWrite,
+	RegWrite => id_RegWrite, 
+	Mem2Reg => id_Mem2Reg
 );
 
 end main;

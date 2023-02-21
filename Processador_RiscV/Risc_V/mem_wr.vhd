@@ -1,0 +1,44 @@
+--	Registradores de interface do RISC-V
+-- Thiago Cardoso e Thiago Gomes
+
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity mem_wb is
+
+generic(WSIZE : natural := 32);      
+    
+port(
+	clk : in std_logic;
+	
+	wb_in : in std_logic;
+	wb_out : out std_logic;
+	rd_in : in std_logic_vector(4 downto 0);
+	rd_out : out std_logic_vector(4 downto 0);
+	ula_in, mem_data_in : in std_logic_vector(WSIZE -1 downto 0);
+	ula_out, mem_data_out : out std_logic_vector(WSIZE -1 downto 0);
+	
+	
+	--instr_in : in std_logic_vector(WSIZE -1 downto 0);
+	--instr_out : out std_logic_vector(WSIZE -1 downto 0)
+);
+end mem_wb;
+
+architecture main of mem_wb is
+
+begin
+
+process(clk) begin
+
+	if rising_edge(clk) then
+		wb_out <= wb_in
+		rd_out <= rd_in
+		ula_out <= ula_in
+		mem_data_out <= mem_data_in
+	end if;
+
+end process;
+
+end main;
