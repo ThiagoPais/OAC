@@ -67,6 +67,8 @@ BEGIN
           WHEN "001" => opOut <= "1101";  -- BNE
           WHEN "100" => opOut <= "1000";  -- BLT
           WHEN "101" => opOut <= "1010";  -- BGE
+          WHEN "110" => opOut <= "1001";  -- BLTU
+          WHEN "111" => opOut <= "1011";  -- BGEU
           WHEN OTHERS => opOut <= "0000";
         END CASE;
       WHEN "11" =>
