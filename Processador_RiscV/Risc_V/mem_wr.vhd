@@ -17,8 +17,8 @@ port(
 	wb_out : out std_logic;
 	rd_in : in std_logic_vector(4 downto 0);
 	rd_out : out std_logic_vector(4 downto 0);
-	ula_in, mem_data_in : in std_logic_vector(WSIZE -1 downto 0);
-	ula_out, mem_data_out : out std_logic_vector(WSIZE -1 downto 0);
+	ula_in, memo_data_in : in std_logic_vector(WSIZE -1 downto 0);
+	ula_out, memo_data_out : out std_logic_vector(WSIZE -1 downto 0);
 	
 	
 	--instr_in : in std_logic_vector(WSIZE -1 downto 0);
@@ -36,7 +36,7 @@ process(clk) begin
 		wb_out <= wb_in
 		rd_out <= rd_in
 		ula_out <= ula_in
-		mem_data_out <= mem_data_in
+		memo_data_out <= memo_data_in
 	end if;
 
 end process;

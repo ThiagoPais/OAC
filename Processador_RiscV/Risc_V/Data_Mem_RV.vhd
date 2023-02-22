@@ -20,9 +20,11 @@ end entity;
 
 architecture RTL of Data_Mem_RV is
 
-Type mem_type is array (0 to (2**addr'length)-1) of std_logic_vector(data_in'range);
+Type mem_type is array (0 to (2**16)-1) of std_logic_vector(data_in'range);
 
 signal read_addr: std_logic_vector(addr'range);
+
+constant LIMIT : integer := 16#2000#;
 
 impure function init_mem return mem_type is
 	--file text_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/code.txt"; -- Mudar diret�rio
@@ -43,7 +45,7 @@ begin
 	--end loop;
 	
 	
-	while	not endfile(data_file) and(n*4) < to_integer(x"2000")	loop
+	while not endfile(data_file) and(n*4) < LIMIT loop
 		readline(data_file, text_line);
 		hread(text_line, text_word);
 		memoria(n)	:=	text_word;
@@ -57,13 +59,14 @@ signal mem: mem_type := init_mem;
 begin
 	process(clk) begin
 		if rising_edge(clk)then
-			if we = '1' and (to_integer(unsigned(addr))/4) < to_integer(x"2000") then
+			if we = '1' and (to_integer(unsigned(addr)) < LIMIT) then
 				mem(to_integer(unsigned(addr))/4) <= data_in;
 			end if;
+			read_addr <= addr;
 		end if;
-		read_addr <= addr;
+
+		if (to_integer(unsigned(read_addr)) < LIMIT) then
+			data_out <= mem(to_integer(unsigned(read_addr))/4);
+		end if;
 	end process;
-	if unsigned(read_addr) < x"2000" then
-		data_out <= mem(to_integer(unsigned(read_addr))/4);
-	end if;
 end architecture;

@@ -1,0 +1,22 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+
+
+entity my_and is
+
+port(
+	A : in STD_LOGIC;
+	B : in STD_LOGIC;
+	Y : out STD_LOGIC
+);
+
+end my_and;
+
+
+architecture basic of my_and is
+
+begin
+
+	Y <= (A and B);
+
+end basic;

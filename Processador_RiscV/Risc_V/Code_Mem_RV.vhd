@@ -12,14 +12,13 @@ entity Code_Mem_RV is
 	port (
 		clk 	: in	std_logic;
 		addr 	: in	std_logic_vector(31 downto 0);
-		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);
 end entity;
 
 architecture RTL of Code_Mem_RV is
 
-Type mem_type is array (0 to (2**addr'length)-1) of std_logic_vector(data_in'range);
+Type mem_type is array (0 to (2**16)-1) of std_logic_vector(data_out'range);
 
 signal read_addr: std_logic_vector(addr'range);
 
@@ -30,7 +29,7 @@ impure function init_mem return mem_type is
 	--file data_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/data.txt"; -- Mudar diret�rio
 	
 	variable text_line	:	line;
-	variable text_word	:	std_logic_vector(data_in'range);
+	variable text_word	:	std_logic_vector(data_out'range);
 	variable memoria	:	mem_type;
 	variable n		:	integer;
 
@@ -57,12 +56,13 @@ signal mem: mem_type := init_mem;
 
 begin
 	process(clk) begin
-		if rising_edge(clk)then
+		if rising_edge(clk) then
 			read_addr <= addr;
 		end if;
+
+		if (to_integer(unsigned(read_addr)) < LIMIT) then
+			data_out <= mem(to_integer(unsigned(read_addr))/4);
+		end if;
+
 	end process;
-	
-	if (to_integer(unsigned(read_addr)) < LIMIT) then
-		data_out <= mem(to_integer(unsigned(read_addr))/4);
-	end if;
 end architecture;

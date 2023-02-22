@@ -21,25 +21,13 @@ component Code_Mem_RV is
 		data_out : out	std_logic_vector(31 downto 0)
 	);
 end component;
-
-component Data_Mem_RV is
-	port (
-		clk 	: in	std_logic;
-		we 		: in	std_logic;
-		addr 	: in	std_logic_vector(31 downto 0);
-		data_in  : in	std_logic_vector(31 downto 0);
-		data_out : out	std_logic_vector(31 downto 0)
-	);
-end component;
 	
-signal addr, data_in, data_out : std_logic_vector(31 downto 0);
-signal clk, we : std_logic;
+signal addr, data_out : std_logic_vector(31 downto 0);
+signal clk : std_logic;
 
 begin
 
 	DUT: Code_Mem_RV port map(clk => clk, addr => addr, data_out => data_out);
-
-	DUT1: Data_Mem_RV port map(clk => clk, addr => addr, data_out => data_out, we => we, data_in => data_in);
 	
 	process
 	begin
