@@ -4,7 +4,7 @@ use IEEE.NUMERIC_STD.all;
 
 
 ENTITY Control_ALU IS
-  GENERIC (data_width : NATURAL := 32);
+  GENERIC (WSIZE : natural := 32);
   PORT (
     ALUOp : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
     funct7 : IN STD_LOGIC;
@@ -73,9 +73,9 @@ BEGIN
         END CASE;
       WHEN "11" =>
         IF auipcIn = '0' THEN
-          opOut <= "1110";  -- LUi
+          opOut <= "1110";  -- LUi (e AUIPC)
         ELSE
-          opOut <= "1111";  -- AUiPC
+          opOut <= "1111";  -- JAL
         END IF;
       WHEN OTHERS => opOut <= "0000";
 
