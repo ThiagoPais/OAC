@@ -70,3 +70,4 @@ set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_
 set_global_assignment -name VHDL_FILE id_ex.vhd
 set_global_assignment -name VHDL_FILE ex_mem.vhd
 set_global_assignment -name VHDL_FILE mem_wr.vhd
+set_global_assignment -name VHDL_FILE Testbench.vhd

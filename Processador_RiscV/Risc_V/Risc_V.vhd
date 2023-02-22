@@ -45,7 +45,7 @@ end component;
 component Code_Mem_RV is
 	port (
 		clk 	: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
+		addr 	: in	std_logic_vector(31 downto 0);
 		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);
@@ -55,17 +55,7 @@ component Data_Mem_RV is
 	port (
 		clk 	: in	std_logic;
 		we 		: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
-		data_in  : in	std_logic_vector(31 downto 0);
-		data_out : out	std_logic_vector(31 downto 0)
-	);
-end component;
-
-component Mem_RV is
-	port (
-		clk 	: in	std_logic;
-		we 		: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
+		addr 	: in	std_logic_vector(31 downto 0);
 		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);

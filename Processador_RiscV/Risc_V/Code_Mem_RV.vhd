@@ -11,7 +11,7 @@ use std.textio.all;
 entity Code_Mem_RV is
 	port (
 		clk 	: in	std_logic;
-		addr 	: in	std_logic_vector(7 downto 0);
+		addr 	: in	std_logic_vector(31 downto 0);
 		data_in  : in	std_logic_vector(31 downto 0);
 		data_out : out	std_logic_vector(31 downto 0)
 	);
@@ -22,6 +22,8 @@ architecture RTL of Code_Mem_RV is
 Type mem_type is array (0 to (2**addr'length)-1) of std_logic_vector(data_in'range);
 
 signal read_addr: std_logic_vector(addr'range);
+
+constant LIMIT : integer := 16#2000#;
 
 impure function init_mem return mem_type is
 	file text_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/code.txt"; -- Mudar diret�rio
@@ -34,7 +36,7 @@ impure function init_mem return mem_type is
 
 begin
 	n	:=	0;
-	while not endfile(text_file) and n < 256 loop
+	while not endfile(text_file) and (n*4)< LIMIT loop
 		readline(text_file, text_line);
 		hread(text_line, text_word);
 		memoria(n)	:=	text_word;
@@ -46,7 +48,7 @@ begin
 	--	readline(data_file, text_line);
 	--	hread(text_line, text_word);
 	--	memoria(n)	:=	text_word;
-	--	n	:=	n+4;
+	--	n	:=	n+1;
 	--end loop;
 return memoria;
 end;
@@ -59,6 +61,8 @@ begin
 			read_addr <= addr;
 		end if;
 	end process;
-		
-	data_out <= mem(to_integer(unsigned(read_addr)));
+	
+	if (to_integer(unsigned(read_addr)) < LIMIT) then
+		data_out <= mem(to_integer(unsigned(read_addr))/4);
+	end if;
 end architecture;
