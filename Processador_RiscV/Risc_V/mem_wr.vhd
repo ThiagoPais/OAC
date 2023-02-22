@@ -18,11 +18,7 @@ port(
 	rd_in : in std_logic_vector(4 downto 0);
 	rd_out : out std_logic_vector(4 downto 0);
 	ula_in, memo_data_in : in std_logic_vector(WSIZE -1 downto 0);
-	ula_out, memo_data_out : out std_logic_vector(WSIZE -1 downto 0);
-	
-	
-	--instr_in : in std_logic_vector(WSIZE -1 downto 0);
-	--instr_out : out std_logic_vector(WSIZE -1 downto 0)
+	ula_out, memo_data_out : out std_logic_vector(WSIZE -1 downto 0)
 );
 end mem_wb;
 

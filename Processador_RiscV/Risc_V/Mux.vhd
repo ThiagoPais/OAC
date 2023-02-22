@@ -1,6 +1,7 @@
 library IEEE;
     use IEEE.STD_LOGIC_1164.ALL;
     use IEEE.STD_LOGIC_UNSIGNED.ALL;
+    use IEEE.numeric_std.all;
 
 entity mux is 
 	generic (WSIZE : natural := 32);
@@ -13,9 +14,11 @@ end mux;
 architecture main of mux is
 
 begin
-
-	z <= 	a when ctrl = '0',
-			b when ctrl = '1',
-			x"XXXXXXXX" when others;
-.
+	process begin
+		case ctrl is
+			when '0' => z <= a;
+			when '1' => z <= b;
+			when others => z <= (others => '0');
+		end case;
+	end process;
 end main;

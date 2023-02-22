@@ -22,7 +22,7 @@ port(
 	rs1_in, rs2_in, pc_in, imm_in : in std_logic_vector(WSIZE -1 downto 0);
 	rs1_out, rs2_out, pc_out, imm_out : out std_logic_vector(WSIZE -1 downto 0);
 	ula_instr_in : in std_logic_vector(3 downto 0);
-	funct3 : out std_logic_vector(2 downto 0);
+	funct3 : out std_logic_vector(2 downto 0)
 );
 end id_ex;
 

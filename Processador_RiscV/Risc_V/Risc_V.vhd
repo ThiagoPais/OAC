@@ -9,15 +9,12 @@ use IEEE.numeric_std.all;
 entity RiscV is
 
 generic(WSIZE : natural := 32);      
-    
-port( 
-		
-);
+
 end RiscV;
 
 architecture main of RiscV is
 
--- Declaração dos módulos
+-- Declaracao dos modulos
 
 component ULA_RiscV is
 	port(
@@ -95,7 +92,7 @@ component id_ex is
 	rs1_in, rs2_in, pc_in, imm_in : in std_logic_vector(WSIZE -1 downto 0);
 	rs1_out, rs2_out, pc_out, imm_out : out std_logic_vector(WSIZE -1 downto 0);
 	ula_instr_in : in std_logic_vector(3 downto 0);
-	funct3 : out std_logic_vector(2 downto 0);
+	funct3 : out std_logic_vector(2 downto 0)
 	);
 end component;
 
@@ -108,7 +105,7 @@ component ex_mem is
 		rd_in : in std_logic_vector(4 downto 0);
 		rd_out : out std_logic_vector(4 downto 0);
 		rs2_in, pc_in, ula_in : in std_logic_vector(WSIZE -1 downto 0);
-		rs2_out, pc_out, ula_out : out std_logic_vector(WSIZE -1 downto 0);
+		rs2_out, pc_out, ula_out : out std_logic_vector(WSIZE -1 downto 0)
 	);
 end component;
 
@@ -121,7 +118,7 @@ component mem_wb is
 		rd_in : in std_logic_vector(4 downto 0);
 		rd_out : out std_logic_vector(4 downto 0);
 		ula_in, mem_data_in : in std_logic_vector(WSIZE -1 downto 0);
-		ula_out, mem_data_out : out std_logic_vector(WSIZE -1 downto 0);
+		ula_out, mem_data_out : out std_logic_vector(WSIZE -1 downto 0)
 	);
 end component;
 
@@ -181,7 +178,7 @@ component Control_ALU is
 end component;
 
 
--- Ligação entre módulos
+-- Ligacao entre modulos
 begin
 
 signal clk, x_we, x_rst, zero, m_we : std_logic;
@@ -191,7 +188,7 @@ signal PC, mem_addr : std_logic_vector(7 downto 0);
 signal xreg_out1, xreg_out2, xreg_in, ula_in1, ula_in2, ula_out : std_logic_vector(WSIZE-1 downto 0);
 signal id_instr, if_instr, mem_out, mem_in: std_logic_vector(WSIZE-1 downto 0);
 
-x_rst <= 0;
+x_rst := 0;
 
 xreg: XREGS port map(
 	clk => clk,

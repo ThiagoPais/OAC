@@ -42,7 +42,7 @@ begin
 		n	:=	n+1;
 	end loop;
 	
-	n = 256;
+	n := 256;
 	
 	while	n<512	loop
 		readline(data_file, text_line);

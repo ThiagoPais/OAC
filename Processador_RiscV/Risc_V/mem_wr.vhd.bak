@@ -13,12 +13,12 @@ generic(WSIZE : natural := 32);
 port(
 	clk : in std_logic;
 	
-	wb_in : in std_logic;
-	wb_out : out std_logic;
+	wb_in, memread_in : in std_logic;
+	wb_out, memread_out : out std_logic;
 	rd_in : in std_logic_vector(4 downto 0);
 	rd_out : out std_logic_vector(4 downto 0);
-	rs2_in, imm_in, ula_in, mem_data_in : in std_logic_vector(WSIZE -1 downto 0);
-	rs2_out, imm_out, ula_out, mem_data_out : out std_logic_vector(WSIZE -1 downto 0);
+	ula_in, memo_data_in : in std_logic_vector(WSIZE -1 downto 0);
+	ula_out, memo_data_out : out std_logic_vector(WSIZE -1 downto 0);
 	
 	
 	--instr_in : in std_logic_vector(WSIZE -1 downto 0);
@@ -33,8 +33,11 @@ begin
 process(clk) begin
 
 	if rising_edge(clk) then
-		pc_out <= pc_in;
-		instr_out <= instr_in;
+		wb_out <= wb_in;
+		rd_out <= rd_in;
+		ula_out <= ula_in;
+		memo_data_out <= memo_data_in;
+		memread_out <= memread_in;
 	end if;
 
 end process;

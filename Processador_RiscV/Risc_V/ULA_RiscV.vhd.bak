@@ -46,12 +46,12 @@ begin
             when SLL_OP => a32 <= std_logic_vector(shift_left(unsigned(A),to_integer(unsigned(B))));
             when SRL_OP => a32 <= std_logic_vector(shift_right(unsigned(A),to_integer(unsigned(B))));
             when SRA_OP => a32 <= std_logic_vector(shift_right(signed(A), to_integer(unsigned(B))));
-            when SLT_OP => if(signed(A) < signed(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
-            when SLTU_OP => if(unsigned(A) < unsigned(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
-            when SGE_OP => if(signed(A) >= signed(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
-            when SGEU_OP => if(unsigned(A) >= unsigned(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
-            when SEQ_OP => if(A = B) then a32 <= ONE32; else a32 <= ZERO32; end if;
-            when SNE_OP => if(A /= B) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SLT_OP => a32 <= if(signed(A) < signed(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SLTU_OP => a32 <= if(unsigned(A) < unsigned(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SGE_OP => a32 <= if(signed(A) >= signed(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SGEU_OP => a32 <= if(unsigned(A) >= unsigned(B)) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SEQ_OP => a32 <= if(A = B) then a32 <= ONE32; else a32 <= ZERO32; end if;
+            when SNE_OP => a32 <= if(A /= B) then a32 <= ONE32; else a32 <= ZERO32; end if;
             
             when LUI_AUIPC_OP => a32 <= std_logic_vector(unsigned(A) + shift_left(unsigned(B), 12));
             when JAL_OP => a32 <= std_logic_vector(unsigned(A) + 4);

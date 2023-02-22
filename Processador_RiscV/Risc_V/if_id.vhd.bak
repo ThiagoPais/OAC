@@ -6,20 +6,21 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity if/id is
+entity if_id is
 
 generic(WSIZE : natural := 32);      
     
 port(
 	clk : in std_logic;
-	pc_in : in std_logic_vector(7 downto 0);
-	instr_in : in std_logic_vector(WSIZE -1 downto 0);
-	pc_out : out std_logic_vector(7 downto 0);
-	instr_out : out std_logic_vector(WSIZE -1 downto 0)
+	
+	pc_in, instr_in : in std_logic_vector(WSIZE -1 downto 0);
+	pc_out, instr_out : out std_logic_vector(WSIZE -1 downto 0);
+	rs1_out, rs2_out, rd_out : out std_logic_vector(4 downto 0);
+	ula_instr : out std_logic_vector(3 downto 0)
 );
-end if/id;
+end if_id;
 
-architecture main of if/id is
+architecture main of if_id is
 
 begin
 
@@ -28,8 +29,12 @@ process(clk) begin
 	if rising_edge(clk) then
 		pc_out <= pc_in;
 		instr_out <= instr_in;
+		rs1_out <= instr(19 downto 15);
+		rs2_out <= instr(24 downto 20);
+		rd_out <= instr(11 downto 7);
+		ula_instr <= instr(30) & instr(14 downto 12);
 	end if;
 
 end process;
 
-end main
+end main;

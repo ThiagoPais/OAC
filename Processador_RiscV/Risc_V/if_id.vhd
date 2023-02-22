@@ -29,10 +29,10 @@ process(clk) begin
 	if rising_edge(clk) then
 		pc_out <= pc_in;
 		instr_out <= instr_in;
-		rs1_out <= instr(19 downto 15);
-		rs2_out <= instr(24 downto 20);
-		rd_out <= instr(11 downto 7);
-		ula_instr <= instr(30) & instr(14 downto 12);
+		rs1_out <= instr_in(19 downto 15);
+		rs2_out <= instr_in(24 downto 20);
+		rd_out <= instr_in(11 downto 7);
+		ula_instr <= instr_in(30) & instr_in(14 downto 12);
 	end if;
 
 end process;
