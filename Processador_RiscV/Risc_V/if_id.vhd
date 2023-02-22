@@ -14,7 +14,9 @@ port(
 	clk : in std_logic;
 	
 	pc_in, instr_in : in std_logic_vector(WSIZE -1 downto 0);
-	pc_out, instr_out : out std_logic_vector(WSIZE -1 downto 0)
+	pc_out, instr_out : out std_logic_vector(WSIZE -1 downto 0);
+	rs1_out, rs2_out, rd_out : out std_logic_vector(4 downto 0);
+	ula_instr : out std_logic_vector(3 downto 0)
 );
 end if_id;
 
@@ -27,6 +29,10 @@ process(clk) begin
 	if rising_edge(clk) then
 		pc_out <= pc_in;
 		instr_out <= instr_in;
+		rs1_out <= instr(19 downto 15);
+		rs2_out <= instr(24 downto 20);
+		rd_out <= instr(11 downto 7);
+		ula_instr <= instr(30) & instr(14 downto 12);
 	end if;
 
 end process;
