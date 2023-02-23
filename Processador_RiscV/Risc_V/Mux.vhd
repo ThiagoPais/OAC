@@ -7,14 +7,15 @@ entity mux is
 	generic (WSIZE : natural := 32);
 	port (
 		a, b : in std_logic_vector(WSIZE-1 downto 0);
-		ctrl: in std_logic;
-		z : out std_logic_vector(WSIZE-1 downto 0));
+		ctrl, clk: in std_logic;
+		z : out std_logic_vector(WSIZE-1 downto 0)
+	);
 end mux;
 
 architecture main of mux is
 
 begin
-	process begin
+	process(clk) begin
 		case ctrl is
 			when '0' => z <= a;
 			when '1' => z <= b;

@@ -19,7 +19,8 @@ port(
 	ALUOp_out : out std_logic_vector(1 downto 0);
 	rd_in : in std_logic_vector(4 downto 0);
 	rd_out : out std_logic_vector(4 downto 0);
-	rs1_in, rs2_in, pc_in, imm_in : in std_logic_vector(WSIZE -1 downto 0);
+	imm_in : signed(31 downto 0);
+	rs1_in, rs2_in, pc_in : in std_logic_vector(WSIZE -1 downto 0);
 	rs1_out, rs2_out, pc_out, imm_out : out std_logic_vector(WSIZE -1 downto 0);
 	ula_instr_in : in std_logic_vector(3 downto 0);
 	funct3 : out std_logic_vector(2 downto 0)
@@ -41,7 +42,7 @@ process(clk) begin
 		rs1_out <= rs1_in;
 		rs2_out <= rs2_in;
 		pc_out <= pc_in;
-		imm_out <= imm_in;
+		imm_out <= std_logic_vector(imm_in);
 		ALUOp_out <= ALUOp_in;
 		ALUSrc_out <= ALUSrc_in;
 		funct7 <= ula_instr_in(3);

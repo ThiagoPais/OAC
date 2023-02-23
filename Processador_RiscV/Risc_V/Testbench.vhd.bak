@@ -7,28 +7,30 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 entity testbench is
-
-generic(WSIZE : natural := 32);
-
+	generic(WSIZE : natural := 32);
 end testbench;
 
 architecture test of testbench is
 
-component Code_Mem_RV is
-	port (
-		clk 	: in	std_logic;
-		addr 	: in	std_logic_vector(31 downto 0);
-		data_out : out	std_logic_vector(31 downto 0)
-	);
+component RiscV is
+
+generic(WSIZE : natural := 32);
+
+port(
+	trava : in std_logic := '0';
+	ender_reg : in std_logic_vector(4 downto 0);
+	saida_reg : out std_logic_vector(WSIZE -1 downto 0)
+);
 end component;
 	
-signal addr, data_out : std_logic_vector(31 downto 0);
-signal clk : std_logic;
+signal addr, data_in, data_out, saida_reg : std_logic_vector(31 downto 0);
+signal ender_reg : std_logic_vector(4 downto 0);
+signal clk, we, trava : std_logic;
 
 begin
 
-	DUT: Code_Mem_RV port map(clk => clk, addr => addr, data_out => data_out);
-	
+	DUT: RiscV port map(trava => trava, ender_reg => ender_reg, saida_reg => saida_reg);
+
 	process
 	begin
 		clk <= '0';
@@ -39,46 +41,50 @@ begin
 
 	process
 	begin
-		wait for 5 ns;
+		wait for 100 ns;
 		
-		addr <= x"00000000";
+		ender_reg <= "00110";
+		wait for 10 ns;
+		assert not (saida_reg = x"00000004")
+		report "t1 = 4"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000004";
+		ender_reg <= "00111";
+		wait for 10 ns;
+		assert not (saida_reg = x"00000003")
+		report "t2 = 3"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000008";
+		ender_reg <= "11100";
+		wait for 10 ns;
+		assert not (saida_reg = x"0000000A")
+		report "t3 = 10"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000000";
+		ender_reg <= "11101";
+		wait for 10 ns;
+		assert not (saida_reg = x"00000007")
+		report "t4 = 7"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000100";
+		ender_reg <= "01011";
+		wait for 10 ns;
+		assert not (saida_reg = x"00000004")
+		report "a1 = 4"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000010";
+		ender_reg <= "01100";
+		wait for 10 ns;
+		assert not (saida_reg = x"0000000e")
+		report "a2 = 14"
+		severity NOTE;
 		wait for 10 ns;
 		
-		addr <= x"00000014";
-		wait for 10 ns;
-		
-		addr <= x"00002000";
-		wait for 10 ns;
-		
-		addr <= x"00000000";
-		wait for 10 ns;
-		
-		addr <= x"00002005";
-		wait for 10 ns;
-		
-		addr <= x"00000008";
-		wait for 10 ns;
-		
-		addr <= x"00003000";
-		wait for 10 ns;
-		
-		addr <= x"00000004";
-		wait for 10 ns;
 	end process;
 	
 end test;

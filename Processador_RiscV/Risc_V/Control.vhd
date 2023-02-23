@@ -4,9 +4,10 @@ use IEEE.numeric_std.all;
 
 entity Control is
 	port (
-			instr  : in std_logic_vector(31 downto 0);
-            ALUOp  : out std_logic_vector(1 downto 0);
-            ALUSrc, AUIPC, Branch, MemRead, MemWrite, RegWrite, Mem2Reg: out std_logic);
+		instr  : in std_logic_vector(31 downto 0);
+		ALUOp  : out std_logic_vector(1 downto 0);
+		ALUSrc, AUIPC, Branch, MemRead, MemWrite, RegWrite, Mem2Reg: out std_logic
+	);
             
 end Control;
 
@@ -20,7 +21,7 @@ begin
     
     case opcode is
     	when x"33" => --Tipo R
-			ALUOp  <= "10";
+	    ALUOp  <= "10";
             ALUSrc <= '0';
             Branch <= '0';
             MemRead <= '0';
@@ -29,7 +30,7 @@ begin
             Mem2Reg <= '0';
             AUIPc <= '0';
             
-		when x"03" => -- Tipo I (LW)
+	when x"03" => -- Tipo I (LW)
             ALUOp  <= "00";
             ALUSrc <= '1';
             Branch <= '0';
@@ -58,7 +59,7 @@ begin
             RegWrite <= '1';
             Mem2Reg <= '0';
             
-		when x"23" => -- Tipo S (sb)
+	when x"23" => -- Tipo S (sb)
             ALUOp  <= "00";
             ALUSrc <= '1';
             Branch <= '0';
@@ -68,17 +69,17 @@ begin
             AUIPc <= '0';
             
         when x"37"| x"17" => -- Tipo U (LUI e AUIPC) 
-			ALUOp  <= "10;
+	    ALUOp  <= "10";
             ALUSrc <= '1';
-            Branch <= '0;
+            Branch <= '0';
             MemRead <= '0';
             MemWrite <= '0';
             RegWrite <= '1';
             Mem2Reg <= '1';
-            AUIPc <= '1;
+            AUIPc <= '1';
             
             
-		when x"63" => -- Tipo B (branchs)
+	when x"63" => -- Tipo B (branchs)
             ALUOp  <= "01";
             ALUSrc <= '0';
             Branch <= '1';
@@ -88,17 +89,17 @@ begin
             AUIPc <= '0';
               
         when x"6F" => -- Tipo I (jal) >>>> Verifcar
-        	ALUOp  <= "10";
+            ALUOp  <= "10";
             ALUSrc <= '1';
             Branch <= '1';
             MemRead <= '0';
             MemWrite <= '0';
             RegWrite <= '1';
-            Mem2Reg <= '2;
+            Mem2Reg <= '0';
             AUIPc <= '0';
         
-		when others => --  >>>> Verifcar
-       		ALUOp  <= "00";
+	when others => --  >>>> Verifcar
+       	    ALUOp  <= "00";
             ALUSrc <= '0';
             Branch <= '0';
             MemRead <= '0';

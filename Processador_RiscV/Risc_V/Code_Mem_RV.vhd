@@ -25,7 +25,7 @@ signal read_addr: std_logic_vector(addr'range);
 constant LIMIT : integer := 16#2000#;
 
 impure function init_mem return mem_type is
-	file text_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/code.txt"; -- Mudar diret�rio
+	file text_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Risc_V/code.txt"; -- Mudar diret�rio
 	--file data_file	:	text open read_mode is "C:/Users/thiag/OneDrive/Documentos/Facul/OAC/Code/Processador_RiscV/Memory_RiscV/data.txt"; -- Mudar diret�rio
 	
 	variable text_line	:	line;
