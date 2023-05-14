@@ -337,7 +337,7 @@ void execute() {
         case I_sb:
             return f_sb();
         case I_sh:
-            return f_sb();
+            return f_sh();
         case I_sw:
             return f_sw();
 
