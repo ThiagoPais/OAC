@@ -183,6 +183,7 @@ void f_xori();
 void f_ecall();
 void f_sb();
 void f_sw();
+void f_sh();
 
 void p_bin(int32_t bin);
 
